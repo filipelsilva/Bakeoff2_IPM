@@ -186,21 +186,21 @@ function drawTarget(i)
   // Check whether this target is the target the user should be trying to select
   if (trials[current_trial] === i) 
   { 
-    // Highlights the target the user should be trying to select
-    // with a white border
-    stroke(color(220,220,220));
-    strokeWeight(2);
-    
-    // Remember you are allowed to access targets (i-1) and (i+1)
-    // if this is the target the user should be trying to select
-    //
+    fill(color(255,0,0));
   }
-  // Does not draw a border if this is not the target the user
-  // should be trying to select
-  else noStroke();          
+  else if (trials[current_trial + 1] === i)
+  {
+    fill(color(155,155,155));                 
+    stroke(color(255,0,0));
+    strokeWeight(5);
+  }
+  else
+  {
+    fill(color(155,155,155));                 
+    noStroke();
+  }
 
   // Draws the target
-  fill(color(155,155,155));                 
   circle(target.x, target.y, target.w);
 }
 
