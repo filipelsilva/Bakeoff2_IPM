@@ -23,10 +23,10 @@ let database;                  // Firebase DB
 
 // Study control parameters
 let draw_targets     = false;  // used to control what to show in draw()
-let trials 			 = [];     // contains the order of targets that activate in the test
+let trials		     = [];     // contains the order of targets that activate in the test
 let current_trial    = 0;      // the current trial number (indexes into trials array above)
 let attempt          = 0;      // users complete each test twice to account for practice (attemps 0 and 1)
-let fitts_IDs        = [];     // add the Fitts ID for each selection here (-1 when there is a miss)
+let fitts_IDs        = ["---"] // add the Fitts ID for each selection here (-1 when there is a miss)
 
 // Target class (position and width)
 class Target
@@ -94,7 +94,11 @@ function printAndSavePerformance()
   text("Average time for each target (+ penalty): " + target_w_penalty + "s", width/2, 220);
   
   // Print Fitts IDS (one per target, -1 if failed selection)
-  // 
+  text("Fitts Index of Performance", width/2, 260);
+  for (let i = 1; i < 25; i++)
+    text("Target " + i + ": " + fitts_IDs[i-1], width/3, 260+(i+1)*20);
+  for (i = 25; i < 49; i++)
+    text("Target " + i + ": " + fitts_IDs[i-1], 2*width/3, 260+(i-24+1)*20);
 
   // Saves results (DO NOT CHANGE!)
   let attempt_data = 
@@ -140,8 +144,17 @@ function mousePressed()
     
     // Check to see if the mouse cursor is inside the target bounds,
     // increasing either the 'hits' or 'misses' counters
-    if (dist(target.x, target.y, mouseX, mouseY) < target.w/2)  hits++;                                                       
-    else misses++;
+    let distance = dist(target.x, target.y, mouseX, mouseY); 
+
+    if (distance < target.w/2) {
+      let ID = log((distance/target.w) + 1)/log(2)
+      fitts_IDs.push(ID);
+      hits++;                                                       
+    }
+    else {
+      fitts_IDs.push(-1);
+      misses++;
+    }
     
     current_trial++;                 // Move on to the next trial/target
     
