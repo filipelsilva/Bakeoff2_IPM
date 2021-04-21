@@ -182,11 +182,16 @@ function drawTarget(i)
 {
   // Get the location and size for target (i)
   let target = getTargetBounds(i);             
+  let next_target = getTargetBounds(trials[current_trial + 1]);             
 
   // Check whether this target is the target the user should be trying to select
   if (trials[current_trial] === i) 
   { 
     fill(color(0,255,0));
+    strokeWeight(5);
+    stroke(color(255,0,0));
+    line(target.x, target.y, next_target.x, next_target.y)
+    noStroke();
   }
   else if (trials[current_trial + 1] === i)
   {
