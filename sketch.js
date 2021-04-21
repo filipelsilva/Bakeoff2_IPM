@@ -186,7 +186,7 @@ function drawTarget(i)
   // Check whether this target is the target the user should be trying to select
   if (trials[current_trial] === i) 
   { 
-    fill(color(255,0,0));
+    fill(color(0,255,0));
   }
   else if (trials[current_trial + 1] === i)
   {
