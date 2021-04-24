@@ -19,7 +19,9 @@ let continue_button;
 let testStartTime, testEndTime;// time between the start and end of one attempt (48 trials)
 let hits 			 = 0;      // number of successful selections
 let misses 			 = 0;      // number of missed selections (used to calculate accuracy)
-let database;                  // Firebase DB  
+let database;                  // Firebase DB
+let combo = 0;  //Hit Combo 
+let combo_size = 18; //Hit combo font size  
 
 // Study control parameters
 let draw_targets     = false;  // used to control what to show in draw()
@@ -63,6 +65,11 @@ function draw()
     fill(color(255,255,255));
     textAlign(LEFT);
     text("Trial " + (current_trial + 1) + " of " + trials.length, 50, 20);
+
+    // Print hit combo at center of screen, above the grid
+    textAlign(CENTER);
+    textSize(combo_size);
+    text("Hit Combo: " + combo + "x", width/2, TOP_PADDING/2+50);
     
     let current_target = getCurrentTarget();
     let next_target = getNextTarget();
@@ -89,7 +96,9 @@ function printAndSavePerformance()
   let timestamp         = day() + "/" + month() + "/" + year() + "  " + hour() + ":" + minute() + ":" + second();
   
   background(color(0,0,0));   // clears screen
+  textSize(18);
   fill(color(255,255,255));   // set text fill color to white
+  textAlign(LEFT);
   text(timestamp, 10, 20);    // display time on screen (top-left corner)
   
   textAlign(CENTER);
@@ -157,11 +166,19 @@ function mousePressed()
     if (distance < target.w/2) {
       let ID = log((distance/target.w) + 1)/log(2)
       fitts_IDs.push(ID);
-      hits++;                                                       
+      hits++;  
+
+      //Icreases combo and it's font size
+      combo++; 
+      combo_size += 1;                                                    
     }
     else {
       fitts_IDs.push(-1);
       misses++;
+
+      //Resets combo and it's font size
+      combo = 0;
+      combo_size = 18; 
     }
     
     current_trial++;                 // Move on to the next trial/target
@@ -172,7 +189,11 @@ function mousePressed()
       testEndTime = millis();
       draw_targets = false;          // Stop showing targets and the user performance results
       printAndSavePerformance();     // Print the user's results on-screen and send these to the DB
-      attempt++;                      
+      attempt++;
+
+      //Resets combo and it's font size
+      combo = 0;
+      combo_size = 18;                       
       
       // If there's an attempt to go create a button to start this
       if (attempt < 2)
