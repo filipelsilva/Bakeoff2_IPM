@@ -1,0 +1,8 @@
+mudar delta so para focar no atual e proximo
+seta para o seguinte
+combo counter
+indicaçao visual de acertar
+paineis iniciais a explicar os icones/interface
+som (irritante)
+var ding = new Audio("sounds/ding-sound-effect_2.mp3");
+      ding.play();
