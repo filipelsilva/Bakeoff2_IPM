@@ -6,3 +6,6 @@ paineis iniciais a explicar os icones/interface
 som (irritante)
 var ding = new Audio("sounds/ding-sound-effect_2.mp3");
       ding.play();
+
+CORES: 120 para o delta min de 50
+255 para o proximo alvo a selecionar
