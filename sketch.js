@@ -65,7 +65,13 @@ function draw()
     text("Trial " + (current_trial + 1) + " of " + trials.length, 50, 20);
     
     // Draw all 16 targets
-	for (var i = 0; i < 16; i++) drawTarget(i);
+    let target = getTargetBounds(trials[current_trial]);             
+    let next_target = getTargetBounds(trials[current_trial + 1]);             
+    strokeWeight(5);
+    stroke(color(255,0,0));
+    line(target.x, target.y, next_target.x, next_target.y)
+
+    for (var i = 0; i < 16; i++) drawTarget(i);
   }
 }
 
@@ -182,22 +188,20 @@ function drawTarget(i)
 {
   // Get the location and size for target (i)
   let target = getTargetBounds(i);             
-  let next_target = getTargetBounds(trials[current_trial + 1]);             
 
   // Check whether this target is the target the user should be trying to select
   if (trials[current_trial] === i) 
   { 
-    fill(color(0,255,0));
     strokeWeight(5);
     stroke(color(255,0,0));
-    line(target.x, target.y, next_target.x, next_target.y)
     noStroke();
+    fill(color(0,255,0));
   }
-  else if (trials[current_trial + 1] === i)
+  else if (trials[current_trial + 1] === i) 
   {
-    fill(color(155,155,155));                 
-    stroke(color(255,0,0));
     strokeWeight(5);
+    stroke(color(255,0,0));
+    fill(color(155,155,155));                 
   }
   else
   {
@@ -207,6 +211,7 @@ function drawTarget(i)
 
   // Draws the target
   circle(target.x, target.y, target.w);
+  noStroke();
 }
 
 // Returns the location and size of a given target
