@@ -64,6 +64,7 @@ function draw()
     // Print trial count at the top left-corner of the canvas
     fill(color(255,255,255));
     textAlign(LEFT);
+    textSize(18);
     text("Trial " + (current_trial + 1) + " of " + trials.length, 50, 20);
 
     // Print hit combo at center of screen, above the grid
