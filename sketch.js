@@ -64,8 +64,16 @@ function draw()
     textAlign(LEFT);
     text("Trial " + (current_trial + 1) + " of " + trials.length, 50, 20);
     
+    let current_target = getCurrentTarget();
+    let next_target = getNextTarget();
+
     // Draw all 16 targets
-	for (var i = 0; i < 16; i++) drawTarget(i);
+	  for (var i = 0; i < 16; i++) {
+      drawTarget(i);
+    }
+    drawPath(current_target, next_target);
+    drawCurrentTarget(current_target);
+    drawNextTarget(next_target);
   }
 }
 
@@ -177,36 +185,53 @@ function mousePressed()
   }
 }
 
+function getCurrentTarget()
+{
+  return getTargetBounds(trials[current_trial]);
+}
+
+function getNextTarget()
+{
+  return getTargetBounds(trials[current_trial + 1]);
+}
+
 // Draw target on-screen
 function drawTarget(i)
 {
   // Get the location and size for target (i)
-  let target = getTargetBounds(i);             
-  let next_target = getTargetBounds(trials[current_trial + 1]);             
-
-  // Check whether this target is the target the user should be trying to select
-  if (trials[current_trial] === i) 
-  { 
-    fill(color(0,255,0));
-    strokeWeight(5);
-    stroke(color(255,0,0));
-    line(target.x, target.y, next_target.x, next_target.y)
-    noStroke();
-  }
-  else if (trials[current_trial + 1] === i)
-  {
-    fill(color(155,155,155));                 
-    stroke(color(255,0,0));
-    strokeWeight(5);
-  }
-  else
-  {
-    fill(color(155,155,155));                 
-    noStroke();
-  }
+  let target = getTargetBounds(i);
 
   // Draws the target
+  fill(color(155,155,155));
   circle(target.x, target.y, target.w);
+}
+
+function drawCurrentTarget(current_target)
+{
+  fill(color(0,255,0));
+  circle(current_target.x, current_target.y, current_target.w);
+  noStroke();
+}
+
+function drawNextTarget(next_target)
+{
+  if(trials[current_trial] != trials[current_trial + 1]){
+    fill(color(155,155,155));
+  }
+  else{
+    fill(color(0,255,0));
+  }
+  stroke(color(255,0,0));
+  strokeWeight(5);
+  circle(next_target.x, next_target.y, next_target.w);
+  noStroke();
+}
+
+function drawPath(current_target, next_target){
+  strokeWeight(5);
+  stroke(color(255,0,0));
+  line(current_target.x, current_target.y, next_target.x, next_target.y)
+  noStroke();
 }
 
 // Returns the location and size of a given target
