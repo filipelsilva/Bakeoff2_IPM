@@ -9,3 +9,7 @@ var ding = new Audio("sounds/ding-sound-effect_2.mp3");
 
 CORES: 120 para o delta min de 50
 255 para o proximo alvo a selecionar
+
+Coisas a melhorar: borda pode não ajudar na seleção pois dá ideia de um alvo
+maior, meter outra cor talvez?
+Meter som mais simpático, que dê ideia de velocidade (referenciar https://editor.p5js.org/Andre_Goncalves/present/OJXykwQTQ)
