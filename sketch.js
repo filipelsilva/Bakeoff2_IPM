@@ -41,6 +41,8 @@ class Target
   }
 }
 
+let ding;
+
 // Runs once at the start
 function setup()
 {
@@ -51,6 +53,9 @@ function setup()
   
   textFont("Arial", 18);     // font size for the majority of the text
   drawUserIDScreen();        // draws the user input screen (student number and display size)
+  masterVolume(0.3);
+  soundFormats('mp3');
+  ding = loadSound("hit_sound.mp3");
 }
 
 // Runs every frame and redraws the screen
@@ -173,14 +178,14 @@ function mousePressed()
     let distance = dist(target.x, target.y, mouseX, mouseY); 
 
     if (distance < target.w/2) {
-      drawCurrentTarget(target);
       let ID = log((distance/target.w) + 1)/log(2)
       fitts_IDs.push(ID);
       hits++;  
 
       // Increases combo and its font size
       combo++; 
-      combo_size += 1;                                                    
+      combo_size += 1;  
+      ding.play();                                            
     }
     else {
       fitts_IDs.push(-1);
