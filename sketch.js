@@ -76,17 +76,18 @@ function draw()
     let next_target = getNextTarget();
 
     // Draw all 16 targets
-	  for (var i = 0; i < 16; i++) {
+    for (var i = 0; i < 16; i++) {
       drawTarget(i);
     }
     drawPath(current_target, next_target);
-    drawCurrentTarget(current_target);
     drawNextTarget(next_target);
 
     let distance = dist(current_target.x, current_target.y, mouseX, mouseY); 
 
     if (distance < current_target.w/2) {
       mouseOnCurrentTarget(current_target);
+    } else {
+      drawCurrentTarget(current_target);
     }
 
   }
@@ -177,7 +178,7 @@ function mousePressed()
       fitts_IDs.push(ID);
       hits++;  
 
-      //Icreases combo and it's font size
+      // Increases combo and its font size
       combo++; 
       combo_size += 1;                                                    
     }
@@ -185,7 +186,7 @@ function mousePressed()
       fitts_IDs.push(-1);
       misses++;
 
-      //Resets combo and it's font size
+      // Resets combo and its font size
       combo = 0;
       combo_size = 18; 
     }
@@ -230,10 +231,15 @@ function drawTarget(i)
 {
   // Get the location and size for target (i)
   let target = getTargetBounds(i);
+  
+  // Check if this is not a current target
+  let current_target = getCurrentTarget();
 
-  // Draws the target
-  fill(color(155,155,155));
-  circle(target.x, target.y, target.w);
+  if (target !== current_target) {
+    // Draws the target
+    fill(color(120,120,120));
+    circle(target.x, target.y, target.w);
+  }
 }
 
 function drawCurrentTarget(current_target)
@@ -244,7 +250,7 @@ function drawCurrentTarget(current_target)
 }
 
 function mouseOnCurrentTarget(current_target){
-  fill(color(0, 50, 0));
+  fill(color(0, 65, 0));
   circle(current_target.x, current_target.y, current_target.w);
   noStroke();
 }
@@ -252,13 +258,13 @@ function mouseOnCurrentTarget(current_target){
 function drawNextTarget(next_target)
 {
   if(trials[current_trial] != trials[current_trial + 1]){
-    fill(color(155,155,155));
+    fill(color(255,255,255));
   }
   else{
     fill(color(0,255,0));
   }
   stroke(color(255,0,0));
-  strokeWeight(5);
+  strokeWeight(3);
   circle(next_target.x, next_target.y, next_target.w);
   noStroke();
 }
