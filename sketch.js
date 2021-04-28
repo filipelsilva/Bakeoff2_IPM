@@ -82,6 +82,13 @@ function draw()
     drawPath(current_target, next_target);
     drawCurrentTarget(current_target);
     drawNextTarget(next_target);
+
+    let distance = dist(current_target.x, current_target.y, mouseX, mouseY); 
+
+    if (distance < current_target.w/2) {
+      mouseOnCurrentTarget(current_target);
+    }
+
   }
 }
 
@@ -103,7 +110,7 @@ function printAndSavePerformance()
   text(timestamp, 10, 20);    // display time on screen (top-left corner)
   
   textAlign(CENTER);
-  text("Attempt " + (attempt + 1) + " out of 2 completed!", width/2, 60); 
+  text("Attempt " + (attempt + 1) + " out o 2 completed!", width/2, 60); 
   text("Hits: " + hits, width/2, 100);
   text("Misses: " + misses, width/2, 120);
   text("Accuracy: " + accuracy + "%", width/2, 140);
@@ -165,6 +172,7 @@ function mousePressed()
     let distance = dist(target.x, target.y, mouseX, mouseY); 
 
     if (distance < target.w/2) {
+      drawCurrentTarget(target);
       let ID = log((distance/target.w) + 1)/log(2)
       fitts_IDs.push(ID);
       hits++;  
@@ -231,6 +239,12 @@ function drawTarget(i)
 function drawCurrentTarget(current_target)
 {
   fill(color(0,255,0));
+  circle(current_target.x, current_target.y, current_target.w);
+  noStroke();
+}
+
+function mouseOnCurrentTarget(current_target){
+  fill(color(0, 50, 0));
   circle(current_target.x, current_target.y, current_target.w);
   noStroke();
 }
