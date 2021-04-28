@@ -110,7 +110,7 @@ function printAndSavePerformance()
   text(timestamp, 10, 20);    // display time on screen (top-left corner)
   
   textAlign(CENTER);
-  text("Attempt " + (attempt + 1) + " out o 2 completed!", width/2, 60); 
+  text("Attempt " + (attempt + 1) + " out of 2 completed!", width/2, 60); 
   text("Hits: " + hits, width/2, 100);
   text("Misses: " + misses, width/2, 120);
   text("Accuracy: " + accuracy + "%", width/2, 140);
