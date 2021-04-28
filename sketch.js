@@ -266,7 +266,7 @@ function drawNextTarget(next_target)
     fill(color(255,255,255));
   }
   else{
-    fill(color(0,255,0));
+    fill(color(0,65,0));
   }
   stroke(color(255,0,0));
   strokeWeight(3);
