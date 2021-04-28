@@ -28,7 +28,7 @@ let draw_targets     = false;  // used to control what to show in draw()
 let trials		     = [];     // contains the order of targets that activate in the test
 let current_trial    = 0;      // the current trial number (indexes into trials array above)
 let attempt          = 0;      // users complete each test twice to account for practice (attemps 0 and 1)
-let fitts_IDs        = ["---"] // add the Fitts ID for each selection here (-1 when there is a miss)
+let fitts_IDs        = [0] // add the Fitts ID for each selection here (-1 when there is a miss)
 
 // Target class (position and width)
 class Target
