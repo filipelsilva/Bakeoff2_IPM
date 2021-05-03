@@ -80,7 +80,7 @@ function drawHelp()
   
   stroke(color(255,0,0));
   strokeWeight(5);
-  line(width/2 + 50, height/2+142, width/2 +10, height/2+142)
+  line(width/2 + 50, height/2+142, width/2 +10, height/2+142);
   
   fill(color(255,255,255));
   stroke(color(255,0,0));
@@ -91,6 +91,42 @@ function drawHelp()
   strokeWeight(3);
   fill(color(0,255,0));
   circle(width/2 + 50, height/2+191, 30);
+  
+}
+
+function drawHelpAgain()
+{
+  let padding = 50;
+  let draws_padding = 250;
+  let height_padding = height/2 - 50;
+  fill(color(255,255,255));
+  textAlign(LEFT);
+  textSize(20);
+  text("Help:", padding+90, height_padding);
+  text("Current Target", padding, height_padding + padding);
+  text("Next Target", padding, height_padding + padding*2);
+  text("2x Click", padding, height_padding + padding*3);
+    
+  fill(color(0,255,0));
+  circle(draws_padding, height_padding+padding-5, 30);
+  noStroke();
+  
+  stroke(color(255,0,0));
+  strokeWeight(5);
+  line(draws_padding, height_padding+padding*2-5, draws_padding - 50, height_padding+padding*2-5);
+  
+  fill(color(255,255,255));
+  stroke(color(255,0,0));
+  strokeWeight(3);
+  circle(draws_padding, height_padding+padding*2-5, 30);
+  
+  stroke(color(255,0,0));
+  strokeWeight(3);
+  fill(color(0,255,0));
+  circle(draws_padding, height_padding+padding*3-5, 30);
+  fill(color(255,0,0));
+  circle(draws_padding, height_padding+padding*3-5, 10);
+  noStroke();
   
 }
 
@@ -130,7 +166,7 @@ function draw()
     } else {
       drawCurrentTarget(current_target);
     }
-
+    drawHelpAgain();
   }
 }
 
@@ -288,22 +324,28 @@ function drawCurrentTarget(current_target)
   fill(color(0,255,0));
   circle(current_target.x, current_target.y, current_target.w);
   noStroke();
+  
+  if (trials[current_trial] === trials[current_trial+1]){
+    fill(color(255,0,0));
+    circle(current_target.x, current_target.y, 20);
+    noStroke();
+  }
 }
 
 function mouseOnCurrentTarget(current_target){
   fill(color(0, 65, 0));
   circle(current_target.x, current_target.y, current_target.w);
   noStroke();
+  if (trials[current_trial] === trials[current_trial+1]){
+    fill(color(255,0,0));
+    circle(current_target.x, current_target.y, 20);
+    noStroke();
+  }
 }
 
 function drawNextTarget(next_target)
 {
-  if(trials[current_trial] != trials[current_trial + 1]){
-    fill(color(255,255,255));
-  }
-  else{
-    fill(color(0,65,0));
-  }
+  fill(color(255,255,255));
   stroke(color(255,0,0));
   strokeWeight(3);
   circle(next_target.x, next_target.y, next_target.w);
