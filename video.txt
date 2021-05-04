@@ -1,0 +1,15 @@
+Meter o código base
+1ª iteração:57a510c4a8f2d5cc2f5133c3c6635d54cf4e4d6d
+	Mudança da cor do alvo atual para verde
+	Mudança do alvo seguinte, para ter borda vermelha
+2ª iteração:393622bfdafda95f17e2c404f6db172ed5175901
+	Adição da linha para o alvo seguinte a vermelho
+	Adição do hit combo
+	Média: 0.473s
+3ª iteração:master
+	Mudança do contador de trials para o centro, para facilitar a visualização
+	Mudança do hit combo, agora font size sempre o mesmo
+	Mudança da cor do alvo quando o rato está em cima deste
+	Adição do som
+	Mudança de contraste dos outros alvos
+	Menu de ajuda
