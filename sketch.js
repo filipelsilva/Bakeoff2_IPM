@@ -17,15 +17,15 @@ let continue_button;
 
 // Metrics
 let testStartTime, testEndTime;// time between the start and end of one attempt (48 trials)
-let hits 			 = 0;      // number of successful selections
-let misses 			 = 0;      // number of missed selections (used to calculate accuracy)
+let hits       = 0;      // number of successful selections
+let misses       = 0;      // number of missed selections (used to calculate accuracy)
 let database;                  // Firebase DB
 let combo = 0;  //Hit Combo 
-let combo_size = 18; //Hit combo font size  
+let combo_size = 36; //Hit combo font size  
 
 // Study control parameters
 let draw_targets     = false;  // used to control what to show in draw()
-let trials		     = [];     // contains the order of targets that activate in the test
+let trials         = [];     // contains the order of targets that activate in the test
 let current_trial    = 0;      // the current trial number (indexes into trials array above)
 let attempt          = 0;      // users complete each test twice to account for practice (attemps 0 and 1)
 let fitts_IDs        = [0] // add the Fitts ID for each selection here (-1 when there is a miss)
@@ -107,9 +107,9 @@ function draw()
     
     // Print trial count at the top left-corner of the canvas
     fill(color(255,255,255));
-    textAlign(LEFT);
-    textSize(18);
-    text("Trial " + (current_trial + 1) + " of " + trials.length, 50, 20);
+    textAlign(CENTER);
+    textSize(30);
+    text("Trial " + (current_trial + 1) + " of " + trials.length, width/2, 150);
 
     // Print hit combo at center of screen, above the grid
     textAlign(CENTER);
@@ -141,11 +141,11 @@ function draw()
 function printAndSavePerformance()
 {
   // DO NOT CHANGE THESE! 
-  let accuracy			= parseFloat(hits * 100) / parseFloat(hits + misses);
+  let accuracy      = parseFloat(hits * 100) / parseFloat(hits + misses);
   let test_time         = (testEndTime - testStartTime) / 1000;
   let time_per_target   = nf((test_time) / parseFloat(hits + misses), 0, 3);
   let penalty           = constrain((((parseFloat(95) - (parseFloat(hits * 100) / parseFloat(hits + misses))) * 0.2)), 0, 100);
-  let target_w_penalty	= nf(((test_time) / parseFloat(hits + misses) + penalty), 0, 3);
+  let target_w_penalty  = nf(((test_time) / parseFloat(hits + misses) + penalty), 0, 3);
   let timestamp         = day() + "/" + month() + "/" + year() + "  " + hour() + ":" + minute() + ":" + second();
   
   background(color(0,0,0));   // clears screen
@@ -222,8 +222,7 @@ function mousePressed()
       hits++;  
 
       // Increases combo and its font size
-      combo++; 
-      combo_size += 1;  
+      combo++;   
       ding.play();                                            
     }
     else {
@@ -232,7 +231,6 @@ function mousePressed()
 
       // Resets combo and its font size
       combo = 0;
-      combo_size = 18; 
     }
     
     current_trial++;                 // Move on to the next trial/target
@@ -246,8 +244,7 @@ function mousePressed()
       attempt++;
 
       //Resets combo and it's font size
-      combo = 0;
-      combo_size = 18;                       
+      combo = 0;                      
       
       // If there's an attempt to go create a button to start this
       if (attempt < 2)
