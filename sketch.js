@@ -54,8 +54,6 @@ function setup()
   textFont("Arial", 18);     // font size for the majority of the text
   drawUserIDScreen();        // draws the user input screen (student number and display size)
 
-  drawHelp();
-
   masterVolume(0.3);
   soundFormats('mp3');
   ding = loadSound("hit_sound.mp3");
@@ -63,38 +61,7 @@ function setup()
 
 }
 
-
 function drawHelp()
-{
-  fill(color(255,255,255));
-  textAlign(CENTER);
-  textSize(20);
-  text("Help:", width/2  , height/2 + 60);
-  text("Current Target", width/2 - 90 , height/2 + 100);
-  text("Next Target", width/2 - 90 , height/2 + 150);
-  text("2x Click", width/2 - 90 , height/2 + 200);
-    
-  fill(color(0,255,0));
-  circle(width/2 + 50, height/2+93, 30);
-  noStroke();
-  
-  stroke(color(255,0,0));
-  strokeWeight(5);
-  line(width/2 + 50, height/2+142, width/2 +10, height/2+142);
-  
-  fill(color(255,255,255));
-  stroke(color(255,0,0));
-  strokeWeight(3);
-  circle(width/2 + 50, height/2+142, 30);
-  
-  stroke(color(255,0,0));
-  strokeWeight(3);
-  fill(color(0,255,0));
-  circle(width/2 + 50, height/2+191, 30);
-  
-}
-
-function drawHelpAgain()
 {
   let padding = 50;
   let draws_padding = 250;
@@ -166,7 +133,7 @@ function draw()
     } else {
       drawCurrentTarget(current_target);
     }
-    drawHelpAgain();
+    drawHelp();
   }
 }
 
